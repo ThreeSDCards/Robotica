@@ -1,11 +1,9 @@
-#ifndef TASK_H
-#define TASK_H
+#pragma once
 
-class Task {
+class Task
+{
 
 public:
-	float Time;
-	float Speed;
+	float Time; //Amount of seconds to execute task
+	float Dest; //Floating point position of destination
 };
-
-#endif
