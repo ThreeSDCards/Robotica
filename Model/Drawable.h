@@ -1,11 +1,7 @@
-#ifndef DRAWABLE_H
-#define DRAWABLE_H
-
-class Drawable {
-
+#pragma once
+class Drawable
+{
 
 public:
 	virtual void Draw() = 0;
 };
-
-#endif

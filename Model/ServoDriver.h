@@ -1,6 +1,4 @@
-#ifndef SERVODRIVER_H
-#define SERVODRIVER_H
-
+#pragma once
 class ServoDriver
 {
 
@@ -12,5 +10,3 @@ public:
 
 	bool IsUp();
 };
-
-#endif

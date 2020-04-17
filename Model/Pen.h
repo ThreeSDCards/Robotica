@@ -1,11 +1,8 @@
-#ifndef PEN_H
-#define PEN_H
-
-class Pen : Square {
+#pragma once
+class Pen : Square
+{
 
 private:
-	PivotPoint* PivotX,_PivotY;
-	ServoDriver* servo;
+	PivotPoint *PivotX, _PivotY;
+	ServoDriver *servo;
 };
-
-#endif
