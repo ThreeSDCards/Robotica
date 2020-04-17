@@ -4,3 +4,5 @@
 class PivotPoint : public Square
 {
 };
+
+//TODO PivotPoint test
