@@ -15,3 +15,4 @@ public:
 };
 
 #endif
+//TODO Point test

@@ -20,3 +20,6 @@ public:
 
     std::vector<Point> &Points();
 };
+
+//TODO Square test
+//TODO Shape test
