@@ -4,12 +4,12 @@
 
 class Shape : Drawable
 {
+	Point orig;
 
 public:
 	//Abstract class
 	virtual ~Shape(){};
-	Point origin;
-
-	Point Orig();
 	void Move(float x, float y);
+	void SetOrig(const Point &pos);
+	Point GetOrig();
 };

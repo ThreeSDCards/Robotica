@@ -1,12 +1,16 @@
 #include "Shape.h"
 
-Point Shape::Orig()
-{
-	return origin;
-}
-
 void Shape::Move(float x, float y)
 {
-	origin.X += x;
-	origin.Y += y;
+	SetOrig({GetOrig().X + x, GetOrig().Y + y});
+}
+
+void Shape::SetOrig(const Point &pos)
+{
+	orig = pos;
+}
+
+Point Shape::GetOrig()
+{
+	return orig;
 }
