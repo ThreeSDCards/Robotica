@@ -1,7 +1,8 @@
 #ifndef MODULE_H
 #define MODULE_H
 
-class Module {
+class Module
+{
 
 private:
 	bool EN;
@@ -21,7 +22,7 @@ public:
 	 */
 	virtual void Routine() = 0;
 
-	void SetReady(int bool_stat);
+	void SetReady(bool stat);
 };
 
 #endif
