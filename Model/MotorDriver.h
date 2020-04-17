@@ -1,19 +1,31 @@
-#ifndef MOTORDRIVER_H
-#define MOTORDRIVER_H
 
-class MotorDriver : public Module {
+#pragma once
+#include "PivotPoint.h"
+#include "Task.h"
+#include "Module.h"
+
+class MotorDriver : public Module
+{
 
 private:
-	float currentPos;
-	float speed;
-	float timeRemaining;
-	PivotPoint* Pivot;
+	float currentPos;	 //Current position in own axis.
+	float stepSize;		 //Speed for pivot movement
+	float timeRemaining; //Time remaining for movement
+	PivotPoint *Pivot;
 	bool isXDriver;
 
 public:
-	void Do(Task& task);
+	void Do(Task task);
+	MotorDriver(const PivotPoint &pivot, bool IsXDriver);
 
-	float calculateDeltaS(Task% task);
+private:
+	/*
+	 *	Transforms next destination to step itervals
+	 */
+	float calculateStepSize(const Task &task);
 };
 
-#endif
+bool test_MotorDriver();
+
+//math.h is een groot bestand, dus talla.
+float abs(float val) { return (val > 0) ? val : -val; }
