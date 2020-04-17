@@ -1,8 +1,8 @@
-#ifndef MAINCONTROLLER_H
-#define MAINCONTROLLER_H
+#pragma once
+#include "Module.h"
 
-class MainController : public Module {
-
+class MainController : public Module
+{
 
 public:
 	/**
@@ -10,5 +10,3 @@ public:
 	 */
 	void Routine();
 };
-
-#endif
