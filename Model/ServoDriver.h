@@ -1,7 +1,8 @@
 #ifndef SERVODRIVER_H
 #define SERVODRIVER_H
 
-class ServoDriver {
+class ServoDriver
+{
 
 private:
 	bool up;
