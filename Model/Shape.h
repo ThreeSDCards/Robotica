@@ -1,12 +1,12 @@
-#ifndef SHAPE_H
-#define SHAPE_H
+#pragma once
+#include "Point.h"
+#include "Drawable.h"
 
-class Shape : Drawable {
+class Shape : Drawable
+{
 
 public:
 	Point origin;
 
 	Point Orig();
 };
-
-#endif
