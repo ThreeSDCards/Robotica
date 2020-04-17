@@ -1,7 +1,6 @@
-#ifndef PIVOTPOINT_H
-#define PIVOTPOINT_H
+#pragma once
+#include "Square.h"
 
-class PivotPoint : Square {
+class PivotPoint : public Square
+{
 };
-
-#endif
