@@ -1,13 +1,17 @@
 #ifndef POINT_H
 #define POINT_H
 
-class Point {
+class Point
+{
 
 public:
 	float X;
 	float Y;
 
-	Point Add();
+	Point(){};
+	Point(float x, float y);
+
+	Point Add(float x, float y);
 };
 
 #endif
