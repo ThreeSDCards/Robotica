@@ -9,4 +9,5 @@ Er is een General.TODO file voor dingen die nog gedaan moeten worden die niet sp
 
 Voor contributies aan de code raad ik aan om een video tutorial te kijken met betrekking tot jouw IDE/code editor naar keuze over hoe Git(hub) werkt. Implementaties worden namelijk gedaan via pull requests.
 
-Begrepen
+WAT MOET IK DOEN???:
+  Check de open issues onder de issues tab. Als die leeg is, check General.TODO, verder kan je ook nog kijken onder de Projects tab om te zien of ik dat al heb toegevoerd. Dan kan je kijken of daar nog wat te implimenteren staat.
