@@ -23,6 +23,7 @@ private:
 	 *	Transforms next destination to step itervals
 	 */
 	float calculateStepSize(const Task &task);
+	void Routine();
 };
 
 bool test_MotorDriver();

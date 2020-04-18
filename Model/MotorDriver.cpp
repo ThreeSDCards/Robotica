@@ -17,7 +17,21 @@ float MotorDriver::calculateStepSize(const Task &task)
 	return deltaS / (task.Time * 1000);
 }
 
+void MotorDriver::Routine()
+{
+	//TODO - Impliment MotorDriver::Routine
+}
+
 bool test_MotorDriver()
 {
 	//TODO - implimenteer MotorDriver Test
+	try
+	{
+		PivotPoint &pv = *(new PivotPoint({0, 0}));
+		MotorDriver &md = *(new MotorDriver(pv, true));
+	
+	}
+	catch (const char *e)
+	{
+	}
 }
