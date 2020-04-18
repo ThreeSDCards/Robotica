@@ -2,7 +2,7 @@
 #include "Shape.h"
 #include <vector>
 
-class Square : Shape
+class Square : public Shape
 {
     std::vector<Point> points;
     float size;
@@ -19,7 +19,9 @@ public:
     Point &BR();
 
     std::vector<Point> &Points();
+    virtual void Draw();
 };
 
-//TODO Square test
-//TODO Shape test
+bool test_Square();
+
+bool test_Shape();
