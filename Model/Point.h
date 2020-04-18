@@ -1,5 +1,3 @@
-#ifndef POINT_H
-#define POINT_H
 
 class Point
 {
@@ -14,5 +12,4 @@ public:
 	Point Add(float x, float y);
 };
 
-#endif
-//TODO Point test
+bool test_Point();

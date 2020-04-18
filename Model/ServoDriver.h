@@ -1,11 +1,10 @@
-#ifndef SERVODRIVER_H
-#define SERVODRIVER_H
+#pragma once
 
 class ServoDriver
 {
 
 private:
-	bool up;
+	bool up = false;
 
 public:
 	void Toggle();
@@ -13,5 +12,4 @@ public:
 	bool IsUp();
 };
 
-#endif
-//TODO ServoDriver test
+bool test_ServoDriver();

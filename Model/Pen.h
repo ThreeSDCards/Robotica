@@ -11,5 +11,3 @@ private:
 	ServoDriver *servo;
 	Pen(PivotPoint *X, PivotPoint *Y, ServoDriver *servo);
 };
-
-//TODO Pen test
