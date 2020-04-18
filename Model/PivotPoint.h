@@ -3,6 +3,8 @@
 
 class PivotPoint : public Square
 {
-};
+    const float size = 0.05;
 
-//TODO PivotPoint test
+public:
+    PivotPoint(const Point &pos);
+};
