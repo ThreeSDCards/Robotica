@@ -19,7 +19,7 @@ public:
 	/**
 	 * Loop routine of module.
 	 */
-	virtual void Routine() = 0;
+	virtual void Routine(float) = 0;
 
 	void SetReady(bool stat);
 };
