@@ -2,7 +2,7 @@
 #include "Shape.h"
 #include <vector>
 
-class Square : Shape
+class Square : public Shape
 {
     std::vector<Point> points;
     float size;

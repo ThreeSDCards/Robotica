@@ -2,7 +2,7 @@
 #include "Point.h"
 #include "Drawable.h"
 
-class Shape : Drawable
+class Shape : public Drawable
 {
 	Point orig;
 
