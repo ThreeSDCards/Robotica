@@ -12,12 +12,22 @@ void MotorDriver::Do(Task task)
 float MotorDriver::calculateStepSize(const Task &task)
 {
 	//Find difference in position
-	float deltaS = abs(currentPos - task.Dest);
+	float deltaS = task.Dest - currentPos;
 	// Divide difference over remaining timespan in ms
 	return deltaS / (task.Time * 1000);
 }
 
-bool test_MotorDriver()
+void MotorDriver::Routine(float DeltaTime)
 {
-	//TODO - implimenteer MotorDriver Test
+	//Calculate step size
+	auto Step = stepSize * DeltaTime;
+	//Update pivot pos
+	if (isXDriver)
+		Pivot->Move(Step, 0);
+	else
+		Pivot->Move(0, Step);
+
+	//Update internal variables
+	currentPos += Step;
+	timeRemaining -= DeltaTime;
 }

@@ -9,7 +9,7 @@ class MotorDriver : public Module
 
 private:
 	float currentPos;	 //Current position in own axis.
-	float stepSize;		 //Speed for pivot movement
+	float stepSize;		 //Distance for pivot movement per ms
 	float timeRemaining; //Time remaining for movement
 	PivotPoint *Pivot;
 	bool isXDriver;
@@ -17,12 +17,17 @@ private:
 public:
 	void Do(Task task);
 	MotorDriver(const PivotPoint &pivot, bool IsXDriver);
+	void Routine(float DeltaTime) override;
 
 private:
 	/*
 	 *	Transforms next destination to step itervals
 	 */
 	float calculateStepSize(const Task &task);
+
+	//TODO V delete this section V
+public:
+	PivotPoint &GetPivotPoint();
 };
 
 bool test_MotorDriver();
