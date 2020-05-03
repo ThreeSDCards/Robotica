@@ -37,6 +37,17 @@ Point &Square::BR()
     return points.at(3);
 }
 
+void Square::Draw()
+{
+    glVertex2f(TL().X, TL().Y);
+    glVertex2f(TR().X, TR().Y);
+    glVertex2f(BR().X, BR().Y);
+
+    glVertex2f(TL().X, TL().Y);
+    glVertex2f(BR().X, BR().Y);
+    glVertex2f(BL().X, BL().Y);
+}
+
 std::vector<Point> &Square::Points()
 {
     return points;
