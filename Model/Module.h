@@ -21,5 +21,6 @@ public:
 	 */
 	virtual void Routine(float) = 0;
 
+protected:
 	void SetReady(bool stat);
 };
