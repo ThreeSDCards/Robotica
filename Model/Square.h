@@ -19,4 +19,5 @@ public:
     Point &BR();
 
     std::vector<Point> &Points();
+    void Draw() override;
 };
