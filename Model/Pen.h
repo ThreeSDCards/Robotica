@@ -1,8 +1,11 @@
 #pragma once
-class Pen : Square
+#include "Square.h"
+#include "ServoDriver.h"
+
+class Pen : public Square
 {
 
 private:
-	PivotPoint *PivotX, _PivotY;
+	Shape *PivotX, *_PivotY;
 	ServoDriver *servo;
 };
