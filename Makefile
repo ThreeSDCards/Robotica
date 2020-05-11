@@ -1,11 +1,11 @@
 modelsrc = $(wildcard Model/*.cpp)
 modelobjs = $(modelsrc:.cpp=.o)
 CC = g++
-LDFLAGS = -lGl -lGlut
+LDFLAGS = -lGL -lglut
 
 
-Tests: Model tests.cpp
-	$(CC) -o test tests.cpp $(modelobjs) $(LDFLAGS)
+Tests: $(modelobjs) tests.cpp
+	$(CC) -o test $(modelobjs) tests.cpp  $(LDFLAGS)
 
 Model: $(modelobjs)
 
@@ -17,3 +17,5 @@ Model: $(modelobjs)
 clean:
 	rm -f Model/*.o
 	rm -f View/*.o
+	rm -f test
+	rm -f main
