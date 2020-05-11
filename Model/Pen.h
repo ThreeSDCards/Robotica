@@ -6,7 +6,7 @@ class Pen : public Square
 {
 
 private:
-	Shape *PivotX, *_PivotY;
+	Shape *PivotX, *PivotY;
 	ServoDriver *servo;
 	Pen(Shape *X, Shape *Y, ServoDriver *servo);
 };
