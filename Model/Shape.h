@@ -15,3 +15,5 @@ public:
 	void SetOrig(const Point &pos);
 	Point GetOrig();
 };
+
+bool test_Shape();

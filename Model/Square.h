@@ -21,3 +21,5 @@ public:
     std::vector<Point> &Points();
     void Draw() override;
 };
+
+bool test_Square();
