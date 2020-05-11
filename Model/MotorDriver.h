@@ -1,10 +1,9 @@
 
 #pragma once
-#include "Task.h"
 #include "Module.h"
 #include "Square.h"
 
-typedef struct Task
+struct Task
 {
 	float Time; //Amount of seconds to execute task
 	float Dest; //Floating point position of destination
@@ -39,6 +38,3 @@ Shape &____GetPivotPoint(const MotorDriver &driver);
 
 bool test_MotorDriver();
 bool test_Module();
-
-//math.h is een groot bestand, dus talla.
-float abs(float val) { return (val > 0) ? val : -val; }
