@@ -19,9 +19,5 @@ public:
     Point &BR();
 
     std::vector<Point> &Points();
-    virtual void Draw();
+    void Draw() override;
 };
-
-bool test_Square();
-
-bool test_Shape();
