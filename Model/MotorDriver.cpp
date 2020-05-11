@@ -1,5 +1,8 @@
 #include "MotorDriver.h"
 
+MotorDriver::MotorDriver(Shape &pivot, bool isX)
+	: Pivot(&pivot), isXDriver(isX) {}
+
 void MotorDriver::Do(Task task)
 {
 	//Set member fields

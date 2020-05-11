@@ -21,7 +21,7 @@ private:
 
 public:
 	void Do(Task task);
-	MotorDriver(const Shape &pivot, bool IsXDriver);
+	MotorDriver(Shape &pivot, bool IsXDriver);
 	void Routine(float DeltaTime) override;
 
 private:
