@@ -53,11 +53,6 @@ std::vector<Point> &Square::Points()
     return points;
 }
 
-void Square::Draw()
-{
-    //TODO impliment Square::Draw
-}
-
 bool test_Square()
 {
     try
