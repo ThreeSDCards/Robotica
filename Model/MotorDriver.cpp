@@ -69,7 +69,7 @@ bool test_Module()
 		//Test Ready
 		Task task;
 		task.Dest = 1;
-		task.Time = 1;
+		task.Time = 1000; //timeRemaining wordt hierdoor 1000ms
 
 		Driver.Do(task);
 		Driver.Routine(500.0f);

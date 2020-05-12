@@ -6,7 +6,7 @@ void Time::Update()
 
     //Calculate ms elapsed
     auto elapsed = now - lastTime;
-    DeltaTime = elapsed.count();
+    DeltaTime = elapsed.count() / 1000000;
 
     //Update last known time
     lastTime = now;
