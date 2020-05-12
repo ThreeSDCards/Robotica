@@ -3,15 +3,17 @@
 #include "Pen.h"
 #include <vector>
 
-class Model {
+class Model
+{
 
 private:
-	MotorDriver* XDriver,_YDriver;
-	Pen* pen;
+	MotorDriver *XDriver, *YDriver;
+	Pen *pen;
 
 public:
-	std::vector<Module> getDynamicObjects();
+	Model();
+	~Model();
+	std::vector<Module *> getDynamicObjects();
 
 	void Init();
 };
-
