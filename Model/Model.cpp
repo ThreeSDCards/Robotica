@@ -28,4 +28,7 @@ void Model::Init()
 	XDriver = new MotorDriver(xPivot, true);
 	YDriver = new MotorDriver(yPivot, false);
 	//TODO initializeer pen
+
+	//Als laatste! Timer begint na initializatie.
+	timer = new Time();
 }
