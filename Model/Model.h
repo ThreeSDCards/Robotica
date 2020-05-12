@@ -1,16 +1,17 @@
 #pragma once
+#include "MotorDriver.h"
+#include "Pen.h"
+#include <vector>
 
-class Model
-{
-
-public:
-	ServoDriver servoDriver;
-	MainController mainController;
-	std::vector<MotorDriver> DriverX, _DriverY;
+class Model {
 
 private:
-	std::vector<PivotPoint> PivotX, _PivotY;
+	MotorDriver* XDriver,_YDriver;
+	Pen* pen;
 
 public:
-	Pen pen;
+	std::vector<Module> getDynamicObjects();
+
+	void Init();
 };
+
