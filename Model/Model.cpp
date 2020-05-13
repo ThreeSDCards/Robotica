@@ -23,12 +23,21 @@ void Model::Init()
 		schaal doen, maar dan moeten we een
 		transformatie functie toevoegen in View
 	*/
-	Square xPivot({-0.55f, 0.5f}, 0.05f);
-	Square yPivot({-0.5f, 0.45f}, 0.05f);
-	XDriver = new MotorDriver(xPivot, true);
-	YDriver = new MotorDriver(yPivot, false);
-	//TODO initializeer pen
+	xPivot = new Square({-0.55f, 0.5f}, 0.05f);
+	yPivot = new Square({-0.5f, 0.45f}, 0.05f);
+	XDriver = new MotorDriver(*xPivot, true);
+	YDriver = new MotorDriver(*yPivot, false);
 
-	//Als laatste! Timer begint na initializatie.
+	ServoDriver *ZDriver = new ServoDriver();
+	pen = new Pen(xPivot, yPivot, ZDriver);
+
 	timer = new Time();
+}
+
+std::vector<Shape *> Model::getDrawables()
+{
+	std::vector<Shape *> out = std::vector<Shape *>();
+	out.push_back(xPivot);
+	out.push_back(yPivot);
+	return out;
 }
