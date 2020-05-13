@@ -6,6 +6,7 @@ private:
 	bool up = false;
 
 public:
+	ServoDriver() : up(false){};
 	void Toggle();
 
 	bool IsUp();
