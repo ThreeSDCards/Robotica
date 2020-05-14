@@ -30,8 +30,6 @@ void Model::Init()
 
 	ServoDriver *ZDriver = new ServoDriver();
 	pen = new Pen(xPivot, yPivot, ZDriver);
-
-	timer = new Time();
 }
 
 std::vector<Shape *> Model::getDrawables()

@@ -12,7 +12,6 @@ private:
 	Square *xPivot, *yPivot;
 	MotorDriver *XDriver, *YDriver;
 	Pen *pen;
-	Time *timer;
 
 public:
 	Model();
