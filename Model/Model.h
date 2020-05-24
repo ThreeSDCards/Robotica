@@ -18,6 +18,7 @@ public:
 	~Model();
 	std::vector<Module *> getDynamicObjects();
 	std::vector<Shape *> getDrawables();
-
 	void Init();
 };
+
+bool test_Model();
