@@ -5,7 +5,7 @@ viewobjs = $(viewsrc:.cpp=.o)
 CC = g++
 LDFLAGS = -lGL -lglut
 
-main: $(modelobjs) $(viewobjs)
+main: $(modelobjs) $(viewobjs) main.cpp
 	$(CC) -o main main.cpp $(modelobjs) $(viewobjs) $(LDFLAGS)
 
 Tests: $(modelobjs) tests.cpp
