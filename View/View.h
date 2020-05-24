@@ -3,6 +3,7 @@
 #include "../Model/Model.h"
 #include "../Model/Time.h"
 #include <vector>
+#include <iostream>
 
 class View : public Drawable
 {
@@ -15,3 +16,5 @@ public:
 	void Update();
 	void Draw() override;
 };
+
+bool test_View();

@@ -7,12 +7,15 @@ void View::Update()
 {
     //New frame, so set timer
     t.Update();
+
     //Get collection of dynamic modules
     auto modules = model->getDynamicObjects();
+
     //Update all of their states
     for (auto module : modules)
     {
         module->Routine(t.DeltaTime);
+        std::cout << t.DeltaTime << "\n";
     }
 }
 
