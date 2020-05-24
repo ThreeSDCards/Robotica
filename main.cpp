@@ -19,8 +19,12 @@ int main(int ac, char **ap)
     glutCreateWindow("v0.0.1");
     //Initialize global variables
     model = new Model();
+    model->Init();
+
+    //Initialize view
     view = new View(model);
 
+    std::cout << "Initialization succesful.\n";
     glutDisplayFunc(render);
     glutIdleFunc(simulationLoop);
     glutMainLoop();
@@ -39,6 +43,7 @@ void render()
     glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glBegin(GL_TRIANGLES);
     glColor3f(1, 0, 0);
+
     view->Draw();
     glEnd();
     glFlush();
