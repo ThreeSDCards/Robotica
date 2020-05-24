@@ -10,10 +10,18 @@ Model::~Model()
 
 std::vector<Module *> Model::getDynamicObjects()
 {
-	std::vector<Module *> out;
-	out.push_back(XDriver);
-	out.push_back(YDriver);
-	return out;
+	if (initialized)
+	{
+		std::vector<Module *> out;
+		out.push_back(XDriver);
+		out.push_back(YDriver);
+		return out;
+	}
+	else
+	{
+		throw "Model uninitialized";
+		return std::vector<Module *>();
+	}
 }
 
 void Model::Init()
@@ -34,14 +42,24 @@ void Model::Init()
 	task.Time = 1000;
 	task.Dest = -0.5f;
 	YDriver->Do(task);
+
+	initialized = true;
 }
 
 std::vector<Shape *> Model::getDrawables()
 {
-	std::vector<Shape *> out = std::vector<Shape *>();
-	out.push_back(xPivot);
-	out.push_back(yPivot);
-	return out;
+	if (initialized)
+	{
+		std::vector<Shape *> out = std::vector<Shape *>();
+		out.push_back(xPivot);
+		out.push_back(yPivot);
+		return out;
+	}
+	else
+	{
+		throw "Model is not initialized.";
+		return std::vector<Shape *>();
+	}
 }
 
 bool test_Model()

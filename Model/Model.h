@@ -12,6 +12,7 @@ private:
 	Square *xPivot, *yPivot;
 	MotorDriver *XDriver, *YDriver;
 	Pen *pen;
+	bool initialized = false;
 
 public:
 	Model();
