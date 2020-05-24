@@ -5,16 +5,19 @@ viewobjs = $(viewsrc:.cpp=.o)
 CC = g++
 LDFLAGS = -lGL -lglut
 
+main: $(modelobjs) $(viewobjs)
+	$(CC) -o main main.cpp $(modelobjs) $(viewobjs) $(LDFLAGS)
 
 Tests: $(modelobjs) tests.cpp
 	$(CC) -o test $(modelobjs) tests.cpp  $(LDFLAGS)
 
 Model: $(modelobjs)
 
-View: $(modelobjs) $(viewobjs)
+View: $(viewobjs)
+
 
 %.o: %.cpp
-	$(CC) -o $@ -c $<
+	$(CC) -o $@ -c $< $(LDFLAGS)
 
 .PHONY: clean
 
