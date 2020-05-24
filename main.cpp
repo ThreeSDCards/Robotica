@@ -1,15 +1,14 @@
+#include <GL/glew.h>
 #include <GL/glut.h>
+#include "Model/Model.h"
+#include "View/View.h"
+
 #include <iostream>
-#include <map>
-#include "Model/Time.h"
-#include "Model/ServoDriver.h"
-#include "Model/Module.h"
-
-Time *_time;
-std::map<const std::string &, Module> *_modules;
-
 void simulationLoop();
 void render();
+
+Model *model;
+View *view;
 
 int main(int ac, char **ap)
 {
@@ -17,10 +16,10 @@ int main(int ac, char **ap)
     glutInitDisplayMode(GLUT_SINGLE);
     glutInitWindowSize(500, 500);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Test");
+    glutCreateWindow("v0.0.1");
     //Initialize global variables
-    _time = new Time();
-    _modules = new std::map<const std::string &, Module>();
+    model = new Model();
+    view = new View(model);
 
     glutDisplayFunc(render);
     glutIdleFunc(simulationLoop);
@@ -30,26 +29,17 @@ int main(int ac, char **ap)
 
 void simulationLoop()
 {
-    //TODO - implement simulation loop
-    auto &time = *_time;
-    auto &modules = *_modules;
-
-    //Update global time variable
-    time.Update();
-
-    //Execute routines
-    // modules["XDriver"].Routine(time.DeltaTime);
+    view->Update();
 }
 
 void render()
 {
-    glClearColor(0, 0, 1.0, 0.5);
+    glClearColor(0, 0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
     glBegin(GL_TRIANGLES);
-    glVertex3f(-0.7, 0.7, 0);
-    glVertex3f(0.7, 0.7, 0);
-    glVertex3f(0, -1, 0);
+    glColor3f(1, 0, 0);
+    view->Draw();
     glEnd();
     glFlush();
 }
