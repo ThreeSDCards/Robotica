@@ -50,7 +50,9 @@ void Model::Init()
 	XDriver->AddTask(task);
 	task.Dest = -0.5f;
 	XDriver->AddTask(task);
-	
+	task.Time = 500;
+	task.Dest = 0.0f;
+	XDriver->AddTask(task);
 
 	initialized = true;
 }
