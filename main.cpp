@@ -1,5 +1,11 @@
+#ifdef _WIN32
+#include "../GL/glew.h"
+#include "../GL/glut.h"
+#else
 #include <GL/glew.h>
 #include <GL/glut.h>
+#endif
+
 #include "Model/Model.h"
 #include "View/View.h"
 
@@ -23,7 +29,6 @@ int main(int ac, char **ap)
 
     //Initialize view
     view = new View(model);
-
     std::cout << "Initialization succesful.\n";
     glutDisplayFunc(render);
     glutIdleFunc(simulationLoop);
@@ -34,6 +39,7 @@ int main(int ac, char **ap)
 void simulationLoop()
 {
     view->Update();
+    render();
 }
 
 void render()
@@ -41,8 +47,6 @@ void render()
     glClearColor(0, 0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 0, 0);
 
     view->Draw();
     glEnd();
