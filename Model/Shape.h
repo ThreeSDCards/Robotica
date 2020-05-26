@@ -1,8 +1,13 @@
 #pragma once
 #include "Point.h"
 #include "Drawable.h"
-#include "GL/glew.h"
+#ifdef _WIN32
+#include "../GL/glew.h"
+#include "../GL/glut.h"
+#else
+#include <GL/glew.h>
 #include <GL/glut.h>
+#endif
 
 class Shape : public Drawable
 {
@@ -13,7 +18,7 @@ public:
 	virtual ~Shape(){};
 	void Move(float x, float y);
 	void SetOrig(const Point &pos);
-	Point GetOrig();
+	Point GetOrig() const;
 };
 
 bool test_Shape();

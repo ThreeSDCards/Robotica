@@ -10,7 +10,7 @@ void Shape::SetOrig(const Point &pos)
 	orig = pos;
 }
 
-Point Shape::GetOrig()
+Point Shape::GetOrig() const
 {
 	return orig;
 }
