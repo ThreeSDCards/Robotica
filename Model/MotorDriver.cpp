@@ -1,50 +1,74 @@
 #include "MotorDriver.h"
 
 MotorDriver::MotorDriver(Shape &pivot, bool isX)
-	: Pivot(&pivot), isXDriver(isX) {}
+	: Pivot(&pivot), isXDriver(isX) {
+	SetReady(true);
+}
 
-void MotorDriver::Do(Task task)
+void MotorDriver::DoTask(Task task)
 {
 	//Set member fields
 	stepSize = calculateStepSize(task);
 	timeRemaining = task.Time;
+	dest = task.Dest;
 	//Ready = false
 	Module::SetReady(false);
 }
 
 float MotorDriver::calculateStepSize(const Task &task)
 {
+	//Get current pos
+	float pos = (isXDriver) ? Pivot->GetOrig().X : Pivot->GetOrig().Y;
 	//Find difference in position
-	float deltaS = task.Dest - currentPos;
+	float deltaS = task.Dest - pos;
 	// Divide difference over remaining timespan in ms
-	return deltaS / (task.Time * 1000);
+	return deltaS / task.Time;
 }
 
 void MotorDriver::Routine(float DeltaTime)
 {
+	//Execute current task
 	if (!IsReady())
 	{
 		//Calculate step size
 		auto Step = stepSize * DeltaTime;
 		//Update pivot pos
-		if (isXDriver)
+		if (isXDriver) {
 			Pivot->Move(Step, 0);
+		}
 		else
 			Pivot->Move(0, Step);
 
 		//Update internal variables
-		currentPos += Step;
 		timeRemaining -= DeltaTime;
 
+		std::cout << "X: " << Pivot->GetOrig().X << " Y: " << Pivot->GetOrig().Y << "\n";
+
 		//Check if finished with task.
-		if (timeRemaining <= 0)
+		if (timeRemaining <= 0) {
+			//Set pos to exact dest (Floating point isn't perfect.)
+			Point pos = Pivot->GetOrig();
+			isXDriver ? pos.X : pos.Y = dest;
+			Pivot->SetOrig(pos);
+
 			SetReady(true);
+		}
+	}
+	//Check if there are any tasks in queue
+	if (IsReady() && !ToDo.empty()) {
+
+		DoTask(ToDo.front());
+		ToDo.pop();
 	}
 }
 
 Shape &____GetPivotPoint(const MotorDriver &driver)
 {
 	return *driver.Pivot;
+}
+
+void MotorDriver::AddTask(Task task) {
+	ToDo.push(task);
 }
 
 //TESTS
@@ -71,7 +95,7 @@ bool test_Module()
 		task.Dest = 1;
 		task.Time = 1000; //timeRemaining wordt hierdoor 1000ms
 
-		Driver.Do(task);
+		Driver.AddTask(task);
 		Driver.Routine(500.0f);
 		if (Driver.IsReady())
 			throw "MODULE ERROR (READY)";
@@ -103,7 +127,7 @@ bool test_MotorDriver()
 		task.Dest = 1; //(1,0)
 
 		//Execute task
-		xdriver.Do(task);
+		xdriver.AddTask(task);
 
 		//Wait half a second
 		xdriver.Routine(500.0f);

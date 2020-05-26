@@ -2,6 +2,8 @@
 #pragma once
 #include "Module.h"
 #include "Square.h"
+#include <iostream>
+#include <queue>
 
 struct Task
 {
@@ -13,14 +15,15 @@ class MotorDriver : public Module
 {
 
 private:
-	float currentPos;	 //Current position in own axis.
 	float stepSize;		 //Distance for pivot movement per ms
 	float timeRemaining; //Time remaining for movement
 	Shape *Pivot;
 	bool isXDriver;
+	std::queue<Task> ToDo;
+	float dest;
 
 public:
-	void Do(Task task);
+	void AddTask(Task task);
 	MotorDriver(Shape &pivot, bool IsXDriver);
 	void Routine(float DeltaTime) override;
 
@@ -29,6 +32,8 @@ private:
 	 *	Transforms next destination to step itervals
 	 */
 	float calculateStepSize(const Task &task);
+
+	void DoTask(Task task);
 
 	//This friend function is only used for testing :)
 	friend Shape &____GetPivotPoint(const MotorDriver &);
