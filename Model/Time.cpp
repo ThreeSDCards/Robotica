@@ -6,10 +6,14 @@ void Time::Update()
 
     //Calculate ms elapsed
     auto elapsed = now - lastTime;
-    DeltaTime = elapsed.count() / 1000000;
+	DeltaTime = (float)(elapsed.count() / 1000000);
 
     //Update last known time
     lastTime = now;
+
+	//Max 60Hz
+	using namespace std::chrono_literals;
+	std::this_thread::sleep_for(16ms);
 }
 
 bool test_Time()
