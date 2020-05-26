@@ -3,11 +3,11 @@
 #include "Pen.h"
 #include "Time.h"
 #include <vector>
+#include "Dynamic.h"
 #include "Drawable.h"
 
 class Model
 {
-
 private:
 	Square *xPivot, *yPivot;
 	MotorDriver *XDriver, *YDriver;
@@ -17,7 +17,7 @@ private:
 public:
 	Model();
 	~Model();
-	std::vector<Module *> getDynamicObjects();
+	std::vector<Dynamic *> getDynamicObjects();
 	std::vector<Shape *> getDrawables();
 	void Init();
 };
