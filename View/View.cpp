@@ -15,7 +15,6 @@ void View::Update()
     for (auto module : modules)
     {
         module->Routine(t.DeltaTime);
-        std::cout << t.DeltaTime << "\n";
     }
 }
 
