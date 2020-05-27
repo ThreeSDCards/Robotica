@@ -1,7 +1,6 @@
 #pragma once
-#include "Dynamic.h"
 
-class Module : public Dynamic
+class Module
 {
 
 private:
@@ -16,6 +15,11 @@ public:
 	bool Enabled();
 
 	bool IsReady();
+
+	/**
+	 * Loop routine of module.
+	 */
+	virtual void Routine(float) = 0;
 
 protected:
 	void SetReady(bool stat);
