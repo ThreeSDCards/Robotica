@@ -2,16 +2,12 @@
 #pragma once
 #include "Module.h"
 #include "Square.h"
+#include "Task.h"
 #include <iostream>
 #include <queue>
+#include "Dynamic.h"
 
-struct Task
-{
-	float Time; //Amount of seconds to execute task
-	float Dest; //Floating point position of destination
-};
-
-class MotorDriver : public Module
+class MotorDriver : public Module, public Dynamic 
 {
 
 private:
@@ -24,6 +20,7 @@ private:
 
 public:
 	void AddTask(Task task);
+	void AddTask(std::queue<Task> tasks);
 	MotorDriver(Shape &pivot, bool IsXDriver);
 	void Routine(float DeltaTime) override;
 
