@@ -3,6 +3,7 @@
 MotorDriver::MotorDriver(Shape &pivot, bool isX)
 	: Pivot(&pivot), isXDriver(isX) {
 	SetReady(true);
+	Enable();
 }
 
 void MotorDriver::DoTask(Task task)
@@ -13,6 +14,14 @@ void MotorDriver::DoTask(Task task)
 	dest = task.Dest;
 	//Ready = false
 	Module::SetReady(false);
+}
+
+void MotorDriver::AddTask(std::queue<Task> tasks) {
+	auto size = tasks.size();
+	for (int i = 0; i < size; i++) {
+		ToDo.push(tasks.front());
+		tasks.pop();
+	}
 }
 
 float MotorDriver::calculateStepSize(const Task &task)
@@ -27,38 +36,42 @@ float MotorDriver::calculateStepSize(const Task &task)
 
 void MotorDriver::Routine(float DeltaTime)
 {
-	//Execute current task
-	if (!IsReady())
-	{
-		//Calculate step size
-		auto Step = stepSize * DeltaTime;
-		//Update pivot pos
-		if (isXDriver) {
-			Pivot->Move(Step, 0);
+	if (Enabled()) {
+		//Execute current task
+		if (!IsReady())
+		{
+			//Calculate step size
+			auto Step = stepSize * DeltaTime;
+			//Update pivot pos
+			if (isXDriver) {
+				Pivot->Move(Step, 0);
+			}
+			else
+				Pivot->Move(0, Step);
+
+			//Update timekeeping
+			timeRemaining -= DeltaTime;
+
+			//Check if finished with task.
+			if (timeRemaining <= 0) {
+				//Set pos to exact dest (Floating point isn't perfect.)
+				Point pos = Pivot->GetOrig();
+				isXDriver ? pos.X : pos.Y = dest;
+				Pivot->SetOrig(pos);
+
+				SetReady(true);
+			}
 		}
-		else
-			Pivot->Move(0, Step);
-
-		//Update internal variables
-		timeRemaining -= DeltaTime;
-
-		std::cout << "X: " << Pivot->GetOrig().X << " Y: " << Pivot->GetOrig().Y << "\n";
-
-		//Check if finished with task.
-		if (timeRemaining <= 0) {
-			//Set pos to exact dest (Floating point isn't perfect.)
-			Point pos = Pivot->GetOrig();
-			isXDriver ? pos.X : pos.Y = dest;
-			Pivot->SetOrig(pos);
-
-			SetReady(true);
+		//Check if there are any tasks in queue
+		if (IsReady() && !ToDo.empty()) {
+			DoTask(ToDo.front());
+			ToDo.pop();
 		}
-	}
-	//Check if there are any tasks in queue
-	if (IsReady() && !ToDo.empty()) {
 
-		DoTask(ToDo.front());
-		ToDo.pop();
+		if (IsReady() && ToDo.empty()) {
+			std::cout << "Driver " << ((isXDriver) ? "X" : "Y") << ": DONE!\n";
+			Disable();
+		}
 	}
 }
 
@@ -77,7 +90,7 @@ bool test_Module()
 	try
 	{
 		//Init prerequisites
-		auto pv = Square({0, 0}, 0.0f);
+		auto pv = Square({ 0, 0 }, 0.0f);
 		auto Driver = MotorDriver(pv, false);
 
 		//Test Disable
@@ -106,6 +119,7 @@ bool test_Module()
 	}
 	catch (const char *e)
 	{
+		printf("%s\n", e);
 		return false;
 	}
 	return true;
@@ -116,7 +130,7 @@ bool test_MotorDriver()
 	try
 	{
 		//Initialize prerequisites.
-		auto &pv = *(new Square({0, 0}, 0.0f));
+		auto &pv = *(new Square({ 0, 0 }, 0.0f));
 		//Initialize drivers
 		auto xdriver = MotorDriver(pv, true);
 		auto ydriver = MotorDriver(pv, false);
@@ -138,7 +152,10 @@ bool test_MotorDriver()
 	}
 	catch (const char *e)
 	{
+		printf("%s\n", e);
 		return false;
 	}
 	return true;
 }
+
+
