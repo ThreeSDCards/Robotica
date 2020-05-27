@@ -6,10 +6,15 @@ public:
 	float X;
 	float Y;
 
-	Point(){};
+	Point() {};
 	Point(float x, float y);
 
 	Point Add(float x, float y);
 };
 
 bool test_Point();
+
+struct Line {
+	Point p1;
+	Point p2;
+};
