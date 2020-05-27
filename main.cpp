@@ -22,7 +22,7 @@ int main(int ac, char **ap)
     glutInitDisplayMode(GLUT_SINGLE);
     glutInitWindowSize(500, 500);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("v0.0.1");
+    glutCreateWindow("v0.0.2");
     //Initialize global variables
     model = new Model();
     model->Init();
