@@ -18,6 +18,26 @@ View *view;
 
 int main(int ac, char **ap)
 {
+    vector<cv::String> fn;
+	cv::glob("/ThisPC/Pictures/cirkels/*.png", fn, false);
+
+	vector<cv::Mat> images=vector<cv::Mat>();
+	size_t count = fn.size(); //number of png files in images folder
+	for (size_t i = 0; i < count; i++)
+		images.push_back(cv::imread(fn[i]));
+
+
+	//cv::String path("/ThisPC/Pictures/cirkels/*.png"); //select only png out of folder cirkels
+	//vector<cv::String> fn;
+	//vector<cv::Mat> data;
+	//cv::glob(path, fn, true); // recurse
+	//for (size_t k = 0; k < fn.size(); ++k)
+	//{
+	//	cv::Mat im = cv::imread(fn[k]);
+	//	if (im.empty()) continue; //only proceed if sucsessful
+	//	// you probably want to do some preprocessing
+	//	data.push_back(im);
+	//}
     glutInit(&ac, ap);
     glutInitDisplayMode(GLUT_SINGLE);
     glutInitWindowSize(500, 500);
