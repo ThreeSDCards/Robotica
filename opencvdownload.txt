@@ -1,0 +1,10 @@
+**DIT IS ALLEEN VOOR WINDOWS(denk ik)**
+
+open windows powershell
+
+Voer volgende commandas in:
+git clone https://github.com/Microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+.\vcpkg integrate install
+.\vcpkg install opencv[contrib]:x64-windows
