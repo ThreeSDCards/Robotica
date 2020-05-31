@@ -61,9 +61,7 @@ void render()
 
 int camera()
 {
-	//cv::namedWindow("raw", cv::WINDOW_AUTOSIZE); //window for color
 	cv::namedWindow("gray", cv::WINDOW_AUTOSIZE); //window for gray
-	//cv::namedWindow("canny", cv::WINDOW_AUTOSIZE); \\window for canny
 
 	cv::VideoCapture cap; //opent je camera
 	cap.open(0);
@@ -81,23 +79,29 @@ int camera()
 		cap >> bgr_frame; //capture wordt frame
 		if (bgr_frame.empty()) break;
 
-		//cv::imshow("raw", bgr_frame); //laat color zien
-
 		cv::cvtColor(bgr_frame, gray, cv::COLOR_BGR2GRAY); //convert color to gray
-		/*if (i == 49) { //is for image scannen werkt nog niet helemaal lekker
-			for (int i = 0; i < gray.rows; i++)
-				for (int j = 0; j < gray.cols; j++)
-					std::cout << gray.at<uchar>(i, j) << std::endl;
-		}*/
 		cv::imshow("gray", gray); //laat gray zien
-		
-		//cv::Canny(gray, canny, 10, 100, 3, true); //convert gray to canny
-		//cv::imshow("canny", canny); //laat canny zien
 
 		char c = cv::waitKey(10);
 		if (c == 27) break;
 		Sleep(100);
 	}
+	imwrite("bruh.jpg", gray);
+	Mat img = cv::imread("bruh.jpg");
+	cv::namedWindow("photo", cv::WINDOW_AUTOSIZE);
+	imshow("photo", img);
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < (img.cols * 3); j++) {
+			if (img.at<uchar>(i, j) > 100) {
+				img.at<uchar>(i, j) = 255;
+			}
+			else if (img.at<uchar>(i, j) < 100) {
+				img.at<uchar>(i, j) = 0;
+			}
+		}
+	}
+	cv::namedWindow("photo2", cv::WINDOW_AUTOSIZE);
+	imshow("photo2", img);
 
 	cap.release(); //camera uit
 	return 0;
