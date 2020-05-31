@@ -5,9 +5,8 @@
 #include "Task.h"
 #include <iostream>
 #include <queue>
-#include "Dynamic.h"
 
-class MotorDriver : public Module, public Dynamic 
+class MotorDriver : public Module
 {
 
 private:
@@ -23,6 +22,7 @@ public:
 	void AddTask(std::queue<Task> tasks);
 	MotorDriver(Shape &pivot, bool IsXDriver);
 	void Routine(float DeltaTime) override;
+	float LastPos();
 
 private:
 	/*

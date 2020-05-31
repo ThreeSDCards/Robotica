@@ -24,6 +24,10 @@ void MotorDriver::AddTask(std::queue<Task> tasks) {
 	}
 }
 
+float MotorDriver::LastPos() {
+	return ToDo.back().Dest;
+}
+
 float MotorDriver::calculateStepSize(const Task &task)
 {
 	//Get current pos
@@ -90,7 +94,7 @@ bool test_Module()
 	try
 	{
 		//Init prerequisites
-		auto pv = Square({ 0, 0 }, 0.0f);
+		auto pv = Square({0, 0}, 0.0f);
 		auto Driver = MotorDriver(pv, false);
 
 		//Test Disable
@@ -130,7 +134,7 @@ bool test_MotorDriver()
 	try
 	{
 		//Initialize prerequisites.
-		auto &pv = *(new Square({ 0, 0 }, 0.0f));
+		auto &pv = *(new Square({0, 0}, 0.0f));
 		//Initialize drivers
 		auto xdriver = MotorDriver(pv, true);
 		auto ydriver = MotorDriver(pv, false);
@@ -157,5 +161,3 @@ bool test_MotorDriver()
 	}
 	return true;
 }
-
-
