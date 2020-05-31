@@ -8,9 +8,14 @@
 #include "Drawable.h"
 #include <math.h>
 
-struct TaskSet {
+
+#define M_PI            3.14159265358979323846
+#define CIRCLEDEF		20
+
+struct TaskSet{
 	std::queue<Task> X = std::queue<Task>();
 	std::queue<Task> Y = std::queue<Task>();
+	std::queue<Task> Z = std::queue<Task>();
 };
 
 class Model
@@ -30,8 +35,7 @@ public:
 	void Init();
 
 private:
-	std::queue<Task> MakeCurve(int definition, float time, float X, float Y, bool invertY, bool invertX);
-	TaskSet MakeCircle();
+	TaskSet DrawCircle(float radius, float time);
 };
 
 bool test_Model();

@@ -28,8 +28,8 @@ std::vector<Dynamic *> Model::getDynamicObjects()
 
 void Model::Init()
 {
-	xPivot = new Square({ -0.5f, 0.5f }, 0.05f);
-	yPivot = new Square({ -0.5f, 0.5f }, 0.05f);
+	xPivot = new Square({-0.5f, 0.5f}, 0.05f);
+	yPivot = new Square({-0.5f, 0.5f}, 0.05f);
 	XDriver = new MotorDriver(*xPivot, true);
 	YDriver = new MotorDriver(*yPivot, false);
 
@@ -42,59 +42,56 @@ void Model::Init()
 	task.Time = 1000;
 	task.Dest = 0;
 	XDriver->AddTask(task);
-	task.Dest = -0.5f;
-	XDriver->AddTask(task);
-	task.Dest = 0;
-	XDriver->AddTask(task);
-	task.Dest = 0.5;
-	XDriver->AddTask(task);
-
-	//Y
-	task.Time = 1000;
-	task.Dest = 0.5f;
-	YDriver->AddTask(task); //Wait for X to get in position
-	YDriver->AddTask(MakeCurve(5, 1000, 0.5, 0.5, false,false));
-	YDriver->AddTask(MakeCurve(5, 1000, 0.5, 0.5, true,false));
-	YDriver->AddTask(MakeCurve(5, 1000, 0.5, 0.5, true, true));
-	//YDriver->AddTask(MakeCurve(5, 1000, 0.5, 0.5, false, true));
-
-	//Z
-	task.Time = 1000;
 	servo->AddTask(task);
+	//Y
+	task.Dest = 0;
+	YDriver->AddTask(task);
 
+	auto Circle = DrawCircle(0.3f, 3000.0f);
+	XDriver->AddTask(Circle.X);
+	YDriver->AddTask(Circle.Y);
+	servo->AddTask(Circle.Z);
 
 	initialized = true;
 }
 
-std::queue<Task> Model::MakeCurve(int def, float time, float XLength, float YLength, bool invertY, bool invertX) {
-	std::queue<Task> out = std::queue<Task>();
-	float timeChunk = time / def;
-	float XChunk = XLength / def;
-	Task task = Task();
-	task.Time = timeChunk;
-	for (int i = 0; i < def; i++) {
-		if (!invertY && !invertX) {
-			task.Dest = 1 - sin(acos(((i + 1) * XChunk) / XLength));
-			task.Dest *= YLength;
-			task.Dest = 1 - task.Dest;
-			task.Dest -= 0.5;
-			out.push(task);
-		}
-		else if(invertY && !invertX) {
-			task.Dest = 1 - sin(acos(((def - i - 1) * XChunk) / XLength));
-			task.Dest *= YLength;
-			task.Dest -= 0.5;
-			out.push(task);
-		}
-		else if (invertY && invertX) {
-			task.Dest = 1 - sin(acos(((def - i -1) * !XChunk) / XLength));
-			task.Dest *= YLength;
-			task.Dest -= 0.5;
-			out.push(task);
-		}
+TaskSet Model::DrawCircle(float radius, float time) {
+	TaskSet out;
+	Task task;
+	//Get starting point
+	Point start;
+	start.X = XDriver->LastPos();
+	start.Y = YDriver->LastPos();
+
+	//Divide time over segments plus travel to top and back to center.
+	task.Time = time / (CIRCLEDEF + 2);
+	
+	//Go to right side of circle
+	task.Dest = XDriver->LastPos() + radius;
+	out.X.push(task);
+
+	for (int i = 0; i < CIRCLEDEF; i++) {
+		auto theta = (2 * M_PI) / CIRCLEDEF * i;
+		//Calculate new X
+		task.Dest = float(cos(theta));
+		//Multiply by size
+		task.Dest *= radius;
+		out.X.push(task);
+
+		task.Dest = float(sin(theta));
+		task.Dest += float(start.Y);
+		out.Y.push(task);
 	}
-	return out;
+
+	task.Dest = start.X;
+	out.X.push(task);
+	task.Dest = start.Y;
+	out.Y.push(task);
+
+
+	return out; 
 }
+
 std::vector<Shape *> Model::getDrawables()
 {
 	if (initialized)
