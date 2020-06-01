@@ -1,18 +1,18 @@
-#include "Point.h"
+#include "Point2.h"
 
-Point::Point(float x, float y)
+Point2::Point2(float x, float y)
 	: X(x), Y(y) {}
 
-Point Point::Add(float x, float y)
+Point2 Point2::Add(float x, float y)
 {
-	return Point(X + x, Y + y);
+	return Point2(X + x, Y + y);
 }
 
 bool test_Point()
 {
 	try
 	{
-		Point p(3, 0);
+		Point2 p(3, 0);
 
 		//Test Add
 		if (p.Add(5, 4).X != 8 || p.Add(0, -2).Y != -2)
