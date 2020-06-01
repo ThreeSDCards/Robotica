@@ -59,7 +59,7 @@ void MotorDriver::Routine(float DeltaTime)
 			//Check if finished with task.
 			if (timeRemaining <= 0) {
 				//Set pos to exact dest (Floating point isn't perfect.)
-				Point pos = Pivot->GetOrig();
+				Point2 pos = Pivot->GetOrig();
 				isXDriver ? pos.X : pos.Y = dest;
 				Pivot->SetOrig(pos);
 
