@@ -1,5 +1,5 @@
 #pragma once
-#include "Point.h"
+#include "Point2.h"
 #include "Drawable.h"
 #ifdef _WIN32
 #include "../GL/glew.h"
@@ -17,8 +17,8 @@ public:
 	//Abstract class
 	virtual ~Shape(){};
 	void Move(float x, float y);
-	void SetOrig(const Point &pos);
-	Point GetOrig() const;
+	void SetOrig(const Point2 &pos);
+	Point2 GetOrig() const;
 };
 
 bool test_Shape();
