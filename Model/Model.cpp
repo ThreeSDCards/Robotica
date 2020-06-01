@@ -47,7 +47,7 @@ void Model::Init()
 	task.Dest = 0;
 	YDriver->AddTask(task);
 
-	auto Circle = DrawCircle(0.3f, 3000.0f);
+	auto Circle = DrawCircle(rad, 3000.0f);
 	XDriver->AddTask(Circle.X);
 	YDriver->AddTask(Circle.Y);
 	servo->AddTask(Circle.Z);
