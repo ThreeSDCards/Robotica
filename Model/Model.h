@@ -10,7 +10,7 @@
 
 
 #define M_PI            3.14159265358979323846
-#define CIRCLEDEF		20
+#define CIRCLEDEF		250
 
 struct TaskSet{
 	std::queue<Task> X = std::queue<Task>();
@@ -28,6 +28,7 @@ private:
 	bool initialized = false;
 
 public:
+	float rad;
 	Model();
 	~Model();
 	std::vector<Dynamic *> getDynamicObjects();
