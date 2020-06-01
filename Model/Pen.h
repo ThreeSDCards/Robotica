@@ -9,7 +9,7 @@ class Pen : public Square, public Dynamic
 {
 private:
 	int sometimes;
-	Point old;
+	Point2 old;
 	Shape *PivotX, *PivotY;
 	ServoDriver *servo;
 	std::vector<Line> trace;
