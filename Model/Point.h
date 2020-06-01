@@ -1,20 +1,20 @@
 #pragma once
-class Point
+class Point2
 {
 
 public:
 	float X;
 	float Y;
 
-	Point() {};
-	Point(float x, float y);
+	Point2() {};
+	Point2(float x, float y);
 
-	Point Add(float x, float y);
+	Point2 Add(float x, float y);
 };
 
 bool test_Point();
 
 struct Line {
-	Point p1;
-	Point p2;
+	Point2 p1;
+	Point2 p2;
 };
