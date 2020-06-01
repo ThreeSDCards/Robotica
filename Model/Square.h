@@ -10,11 +10,11 @@ public:
     /*
          *  Creates square at pos, size is length of each side.
          */
-    Square(const Point &pos, float size);
-    Point TL();
-    Point TR();
-    Point BL();
-    Point BR();
+    Square(const Point2 &pos, float size);
+    Point2 TL();
+    Point2 TR();
+    Point2 BL();
+    Point2 BR();
     void Draw() override;
 };
 
