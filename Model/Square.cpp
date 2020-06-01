@@ -4,7 +4,7 @@ Square::Square()
     size = 0;
 }
 
-Square::Square(const Point &pos, float size)
+Square::Square(const Point2 &pos, float size)
 {
     SetOrig(pos);
     this->size = size;
@@ -12,17 +12,17 @@ Square::Square(const Point &pos, float size)
 
 Point Square::TL()
 {
-	return Point(GetOrig().Add(-0.5*size, 0.5*size));
+	return Point2(GetOrig().Add(-0.5*size, 0.5*size));
 }
 
 Point Square::TR()
 {
-	return Point(GetOrig().Add(0.5*size, 0.5*size));
+	return Point2(GetOrig().Add(0.5*size, 0.5*size));
 }
 
 Point Square::BL()
 {
-	return Point(GetOrig().Add(-0.5*size, -0.5*size));
+	return Point2(GetOrig().Add(-0.5*size, -0.5*size));
 }
 
 Point Square::BR()
