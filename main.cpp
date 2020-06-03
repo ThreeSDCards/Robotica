@@ -23,6 +23,7 @@ using namespace cv;
 void simulationLoop();
 void render();
 int camera();
+Point2 converter(int x, int y);
 static double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0);
 void setLabel(cv::Mat& im, const std::string label, std::vector<cv::Point>& contour);
 
@@ -96,13 +97,13 @@ int camera()
 	if (src.empty())
 		return -1;
 
-	// Convert to grayscale
-	cv::Mat gray;
-	cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
+	 //Convert to grayscale
+	//cv::Mat gray;
+	//cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
 
 	// Use Canny instead of threshold to catch squares with gradient shading
 	cv::Mat bw;
-	cv::Canny(gray, bw, 0, 50, 5);
+	cv::Canny(src, bw, 0, 50, 5);
 
 	// Find contours
 	std::vector<std::vector<cv::Point> > contours;
@@ -161,4 +162,15 @@ void setLabel(cv::Mat& im, const std::string label, std::vector<cv::Point>& cont
 	cv::Point pt(r.x + ((r.width - text.width) / 2), r.y + ((r.height + text.height) / 2));
 	cv::rectangle(im, pt + cv::Point(0, baseline), pt + cv::Point(text.width, -text.height), CV_RGB(255, 255, 255), cv::FILLED);
 	cv::putText(im, label, pt, fontface, scale, CV_RGB(0, 0, 0), thickness, 8);
+	model->pos = converter(r.x, r.y);
+}
+
+
+Point2 converter(int x, int y) {
+	Point2 out;
+
+	out.X = (x / 125) - 1;
+	out.Y = (y / 125) - 1;
+
+	return out;
 }
