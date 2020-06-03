@@ -1,8 +1,11 @@
 #include "ServoDriver.h"
 
-void ServoDriver::Toggle()
-{
-	up ^= 1;
+void ServoDriver::Up() {
+	up = true;
+}
+
+void ServoDriver::Down() {
+	up = false;
 }
 
 bool ServoDriver::IsUp()
@@ -40,7 +43,7 @@ void ServoDriver::AddTask(Task task) {
 void ServoDriver::AddTask(std::queue<Task> tasks) {
 	auto size = tasks.size();
 	for (int i = 0; i < size; i++) {
-		tasks.push(tasks.front());
+		this->tasks.push(tasks.front());
 		tasks.pop();
 	}
 }
@@ -56,7 +59,11 @@ void ServoDriver::Routine(float DeltaTime)
 
 			//Check if finished with task.
 			if (timeRemaining <= 0) {
-				Toggle();
+				if (Dest > 0)
+					Up();
+				else if (Dest < 0)
+					Down();
+
 				SetReady(true);
 			}
 		}
@@ -76,5 +83,7 @@ void ServoDriver::Routine(float DeltaTime)
 void ServoDriver::DoTask(Task task) {
 	//Set member fields
 	timeRemaining = task.Time;
+	if(task.Dest == 0 || task.Dest == 1 || task.Dest == -1)
+		Dest = (char)task.Dest;
 	Module::SetReady(false);
 }

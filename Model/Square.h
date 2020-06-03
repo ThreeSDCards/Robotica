@@ -7,7 +7,7 @@ class Square : public Shape
 
 public:
     Square();
-    /*
+        /*
          *  Creates square at pos, size is length of each side.
          */
     Square(const Point2 &pos, float size);

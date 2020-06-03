@@ -1,6 +1,7 @@
 #pragma once
-#include "Point2.h"
+#include "Point.h"
 #include "Drawable.h"
+
 #ifdef _WIN32
 #include "../GL/glew.h"
 #include "../GL/glut.h"
@@ -11,7 +12,7 @@
 
 class Shape : public Drawable
 {
-	Point orig;
+	Point2 orig;
 
 public:
 	//Abstract class

@@ -10,24 +10,24 @@ Square::Square(const Point2 &pos, float size)
     this->size = size;
 }
 
-Point Square::TL()
+Point2 Square::TL()
 {
 	return Point2(GetOrig().Add(-0.5*size, 0.5*size));
 }
 
-Point Square::TR()
+Point2 Square::TR()
 {
 	return Point2(GetOrig().Add(0.5*size, 0.5*size));
 }
 
-Point Square::BL()
+Point2 Square::BL()
 {
 	return Point2(GetOrig().Add(-0.5*size, -0.5*size));
 }
 
-Point Square::BR()
+Point2 Square::BR()
 {
-	return Point(GetOrig().Add(0.5*size, -0.5*size));
+	return Point2(GetOrig().Add(0.5*size, -0.5*size));
 }
 
 void Square::Draw()

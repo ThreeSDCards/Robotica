@@ -5,11 +5,12 @@
 #include "Dynamic.h"
 #include <iostream>
 
-class ServoDriver : public Module, public Dynamic
+class ServoDriver : public Module
 {
 
 private:
-	bool up = false;
+	bool up;
+	char Dest;
 	std::queue<Task> tasks;
 	float timeRemaining = 1;
 
@@ -23,7 +24,8 @@ public:
 
 private:
 	void DoTask(Task task);
-	void Toggle();
+	void Up();
+	void Down();
 };
 
 bool test_ServoDriver();
