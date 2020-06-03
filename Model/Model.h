@@ -10,7 +10,10 @@
 
 
 #define M_PI            3.14159265358979323846
-#define CIRCLEDEF		250
+#define CIRCLEDEF		300
+
+#define POINTTIME		1000
+#define RADIUSTIME		500
 
 struct TaskSet{
 	std::queue<Task> X = std::queue<Task>();
@@ -28,7 +31,6 @@ private:
 	bool initialized = false;
 
 public:
-	float rad;
 	Model();
 	~Model();
 	std::vector<Dynamic *> getDynamicObjects();
@@ -36,7 +38,7 @@ public:
 	void Init();
 
 private:
-	TaskSet DrawCircle(float radius, float time);
+	TaskSet DrawCircle(float radius, float time, Point2 pos);
 };
 
 bool test_Model();
