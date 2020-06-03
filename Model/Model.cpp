@@ -37,7 +37,7 @@ void Model::Init()
 	pen = new Pen(xPivot, yPivot, servo);
 
 	//v0.0.3: Curves!
-	auto Circle = DrawCircle(0.3f, 3000.0f, {0.5f,-0.3f});
+	auto Circle = DrawCircle(rad, 3000.0f, pos);
 	XDriver->AddTask(Circle.X);
 	YDriver->AddTask(Circle.Y);
 	servo->AddTask(Circle.Z);/*
