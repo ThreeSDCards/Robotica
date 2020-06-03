@@ -31,6 +31,8 @@ private:
 	bool initialized = false;
 
 public:
+	Point2 pos;
+	float rad;
 	Model();
 	~Model();
 	std::vector<Dynamic *> getDynamicObjects();
