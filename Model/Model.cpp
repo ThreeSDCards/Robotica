@@ -12,7 +12,7 @@ std::vector<Dynamic *> Model::getDynamicObjects()
 {
 	if (initialized)
 	{
-		std::vector<Dynamic *> out;
+		std::vector<Dynamic *> out = std::vector<Dynamic *>();
 		out.push_back(XDriver);
 		out.push_back(YDriver);
 		out.push_back(pen);
@@ -35,59 +35,66 @@ void Model::Init()
 
 	servo = new ServoDriver();
 	pen = new Pen(xPivot, yPivot, servo);
-	Task task = Task();
 
 	//v0.0.3: Curves!
-	//X
-	task.Time = 1000;
-	task.Dest = 0;
-	XDriver->AddTask(task);
-	servo->AddTask(task);
-	//Y
-	task.Dest = 0;
-	YDriver->AddTask(task);
-
-	auto Circle = DrawCircle(rad, 3000.0f);
+	auto Circle = DrawCircle(0.3f, 3000.0f, {0.5f,-0.3f});
 	XDriver->AddTask(Circle.X);
 	YDriver->AddTask(Circle.Y);
-	servo->AddTask(Circle.Z);
+	servo->AddTask(Circle.Z);/*
+	auto Circle2 = DrawCircle(0.3f, 3000.0f, {0.5f, -0.3f});
+	XDriver->AddTask(Circle2.X);
+	YDriver->AddTask(Circle2.Y);
+	servo->AddTask(Circle2.Z);*/
 
 	initialized = true;
 }
 
-TaskSet Model::DrawCircle(float radius, float time) {
+TaskSet Model::DrawCircle(float radius, float time, Point2 pos) {
 	TaskSet out;
 	Task task;
-	//Get starting point
-	Point start;
-	start.X = XDriver->LastPos();
-	start.Y = YDriver->LastPos();
 
-	//Divide time over segments plus travel to top and back to center.
-	task.Time = time / (CIRCLEDEF + 2);
-	
-	//Go to right side of circle
-	task.Dest = XDriver->LastPos() + radius;
+	//Go to position
+	task.Time = POINTTIME;
+	task.Dest = pos.X;
 	out.X.push(task);
+	task.Dest = pos.Y;
+	out.Y.push(task);
+
+	//Go to right side of circle
+	task.Time = RADIUSTIME;
+	task.Dest = pos.X + radius;
+	out.X.push(task);
+	task.Dest = pos.Y;
+	out.Y.push(task);
+
+	//Handle Z
+	task.Time = POINTTIME + RADIUSTIME;
+	task.Dest = 1;
+	out.Z.push(task);
+	//????????????????????????????????????????????????
+	task.Time = time + POINTTIME + RADIUSTIME * 1.82f;
+	//????????????????????????????????????????????????
+	task.Dest = -1;
+	out.Z.push(task);
+
+	
+	//Divide time over segments;
+	task.Time = time / CIRCLEDEF;
 
 	for (int i = 0; i < CIRCLEDEF; i++) {
 		auto theta = (2 * M_PI) / CIRCLEDEF * i;
-		//Calculate new X
-		task.Dest = float(cos(theta));
-		//Multiply by size
-		task.Dest *= radius;
+		task.Dest = float(cos(theta) * radius + pos.X);
 		out.X.push(task);
-
-		task.Dest = float(sin(theta));
-		task.Dest += float(start.Y);
+		task.Dest = float(sin(theta) * radius + pos.Y);
 		out.Y.push(task);
 	}
 
-	task.Dest = start.X;
+	//Go back to pos
+	task.Time = RADIUSTIME;
+	task.Dest = pos.X;
 	out.X.push(task);
-	task.Dest = start.Y;
+	task.Dest = pos.Y;
 	out.Y.push(task);
-
 
 	return out; 
 }
